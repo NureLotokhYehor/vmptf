@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Усі статті</h2>
+    {% for article in articles %}
+        <div class="article">
+            <h3>{{ article.title }}</h3>
+            <p><small>Автор: {{ article.author.username }} | Дата: {{ article.pub_date|date:"d.m.Y H:i" }}</small></p>
+            <p>{{ article.text }}</p>
+            
+            {% if user.is_authenticated and user == article.author %}
+                <a href="{% url 'article_edit' article.pk %}" class="btn">Редагувати</a>
+                <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Видалити</a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>Статей ще немає.</p>
+    {% endfor %}
+{% endblock content %}

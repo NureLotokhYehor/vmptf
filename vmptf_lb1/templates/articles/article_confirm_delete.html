@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Видалити статтю</h2>
+    <p>Ви впевнені, що хочете видалити статтю "{{ object.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Підтвердити видалення</button>
+        <a href="{% url 'article_list' %}" class="btn">Скасувати</a>
+    </form>
+{% endblock content %}
